@@ -12613,6 +12613,8 @@ paths:
 definitions:
   cosmonaut.nameservice.nameservice.MsgBuyNameResponse:
     type: object
+  cosmonaut.nameservice.nameservice.MsgDeleteNameResponse:
+    type: object
   cosmonaut.nameservice.nameservice.MsgSetNameResponse:
     type: object
   cosmonaut.nameservice.nameservice.Params:

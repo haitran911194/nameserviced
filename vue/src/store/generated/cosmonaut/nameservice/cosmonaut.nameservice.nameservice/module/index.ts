@@ -5,11 +5,13 @@ import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
 import { MsgBuyName } from "./types/nameservice/tx";
+import { MsgDeleteName } from "./types/nameservice/tx";
 import { MsgSetName } from "./types/nameservice/tx";
 
 
 const types = [
   ["/cosmonaut.nameservice.nameservice.MsgBuyName", MsgBuyName],
+  ["/cosmonaut.nameservice.nameservice.MsgDeleteName", MsgDeleteName],
   ["/cosmonaut.nameservice.nameservice.MsgSetName", MsgSetName],
   
 ];
@@ -44,6 +46,7 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
     msgBuyName: (data: MsgBuyName): EncodeObject => ({ typeUrl: "/cosmonaut.nameservice.nameservice.MsgBuyName", value: MsgBuyName.fromPartial( data ) }),
+    msgDeleteName: (data: MsgDeleteName): EncodeObject => ({ typeUrl: "/cosmonaut.nameservice.nameservice.MsgDeleteName", value: MsgDeleteName.fromPartial( data ) }),
     msgSetName: (data: MsgSetName): EncodeObject => ({ typeUrl: "/cosmonaut.nameservice.nameservice.MsgSetName", value: MsgSetName.fromPartial( data ) }),
     
   };
