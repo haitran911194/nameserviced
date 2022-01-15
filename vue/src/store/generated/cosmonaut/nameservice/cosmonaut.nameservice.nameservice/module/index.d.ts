@@ -1,9 +1,9 @@
 import { StdFee } from "@cosmjs/launchpad";
 import { Registry, OfflineSigner, EncodeObject } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
+import { MsgSetName } from "./types/nameservice/tx";
 import { MsgBuyName } from "./types/nameservice/tx";
 import { MsgDeleteName } from "./types/nameservice/tx";
-import { MsgSetName } from "./types/nameservice/tx";
 export declare const MissingWalletError: Error;
 export declare const registry: Registry;
 interface TxClientOptions {
@@ -15,9 +15,9 @@ interface SignAndBroadcastOptions {
 }
 declare const txClient: (wallet: OfflineSigner, { addr: addr }?: TxClientOptions) => Promise<{
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }?: SignAndBroadcastOptions) => any;
+    msgSetName: (data: MsgSetName) => EncodeObject;
     msgBuyName: (data: MsgBuyName) => EncodeObject;
     msgDeleteName: (data: MsgDeleteName) => EncodeObject;
-    msgSetName: (data: MsgSetName) => EncodeObject;
 }>;
 interface QueryClientOptions {
     addr: string;
