@@ -2,12 +2,12 @@
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgSetName } from "./types/nameservice/tx";
 import { MsgBuyName } from "./types/nameservice/tx";
+import { MsgSetName } from "./types/nameservice/tx";
 import { MsgDeleteName } from "./types/nameservice/tx";
 const types = [
-    ["/cosmonaut.nameservice.nameservice.MsgSetName", MsgSetName],
     ["/cosmonaut.nameservice.nameservice.MsgBuyName", MsgBuyName],
+    ["/cosmonaut.nameservice.nameservice.MsgSetName", MsgSetName],
     ["/cosmonaut.nameservice.nameservice.MsgDeleteName", MsgDeleteName],
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -29,8 +29,8 @@ const txClient = async (wallet, { addr: addr } = { addr: "http://localhost:26657
     const { address } = (await wallet.getAccounts())[0];
     return {
         signAndBroadcast: (msgs, { fee, memo } = { fee: defaultFee, memo: "" }) => client.signAndBroadcast(address, msgs, fee, memo),
-        msgSetName: (data) => ({ typeUrl: "/cosmonaut.nameservice.nameservice.MsgSetName", value: MsgSetName.fromPartial(data) }),
         msgBuyName: (data) => ({ typeUrl: "/cosmonaut.nameservice.nameservice.MsgBuyName", value: MsgBuyName.fromPartial(data) }),
+        msgSetName: (data) => ({ typeUrl: "/cosmonaut.nameservice.nameservice.MsgSetName", value: MsgSetName.fromPartial(data) }),
         msgDeleteName: (data) => ({ typeUrl: "/cosmonaut.nameservice.nameservice.MsgDeleteName", value: MsgDeleteName.fromPartial(data) }),
     };
 };
